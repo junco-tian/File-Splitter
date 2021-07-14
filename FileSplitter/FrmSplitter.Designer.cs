@@ -78,6 +78,8 @@ namespace FileSplitter {
             this.txtFile.ReadOnly = true;
             this.txtFile.Size = new System.Drawing.Size(435, 22);
             this.txtFile.TabIndex = 1;
+            this.txtFile.AllowDrop = true;
+            this.txtFile.DragEnter += new System.Windows.Forms.DragEventHandler(this.cmdDragFile);
             // 
             // cmdSelectFile
             // 
@@ -156,6 +158,7 @@ namespace FileSplitter {
             0,
             0});
             this.numSize.ValueChanged += new System.EventHandler(this.controlValueChangedEvent);
+            this.numSize.KeyUp += new System.Windows.Forms.KeyEventHandler(this.controlValueChangedEvent);
             // 
             // cmdStart
             // 

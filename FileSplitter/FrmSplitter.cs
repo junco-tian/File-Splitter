@@ -46,9 +46,9 @@ namespace FileSplitter {
             this.Text = Properties.Resources.TITLE;
 
             cmbUnits.Items.Add(new SplitUnitComboboxItem("bytes", SplitUnit.Bytes));
-            cmbUnits.Items.Add(new SplitUnitComboboxItem("Kilobytes", SplitUnit.KiloBytes));
-            cmbUnits.Items.Add(new SplitUnitComboboxItem("Megabytes", SplitUnit.MegaBytes));
-            cmbUnits.Items.Add(new SplitUnitComboboxItem("Gigabytes", SplitUnit.GigaBytes));
+            cmbUnits.Items.Add(new SplitUnitComboboxItem("KB", SplitUnit.KiloBytes));
+            cmbUnits.Items.Add(new SplitUnitComboboxItem("MB", SplitUnit.MegaBytes));
+            cmbUnits.Items.Add(new SplitUnitComboboxItem("GB", SplitUnit.GigaBytes));
             cmbUnits.Items.Add(new SplitUnitComboboxItem(Properties.Resources.CMB_LINES, SplitUnit.Lines));
 
             fileSplitter = new FileSplitWorker();
@@ -129,6 +129,26 @@ namespace FileSplitter {
                     lbEstimatedParts.Text = Properties.Resources.NUMBER_OF_LINES;
                 }
             }
+        }
+
+
+        private  void cmdDragFile(object sender, DragEventArgs e)
+        {
+             string[] s = (string [])e.Data.GetData(DataFormats.FileDrop, false);
+
+            if (s.Length>0)
+            {
+                cmdStart.Enabled = true;
+                fileSplitter.FileName = this.txtFile.Text = s[0];
+                if (fileSplitter.OperationMode != SplitUnit.Lines)
+                {
+                    lbEstimatedParts.Text = String.Format(Properties.Resources.SPLIT_INFO_PARTS, fileSplitter.Parts);
+                }
+                else
+                {
+                    lbEstimatedParts.Text = Properties.Resources.NUMBER_OF_LINES;
+                }
+            }            
         }
 
         /// <summary>
